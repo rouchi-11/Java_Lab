@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+public class A1sc {
+    // Attributes
+    private String name;
+    private int age;
+
+   
+    public A1sc() {
+        this.name = "Unknown";
+        this.age = 0;
+    }
+
+    
+    public A1sc(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+
+        A1sc person1 = new A1sc();
+        System.out.println("Enter name for person 1:");
+        person1.setName(scanner.nextLine());
+        System.out.println("Enter age for person 1:");
+        person1.setAge(scanner.nextInt());
+        scanner.nextLine();
+
+
+        System.out.println("Enter name for person 2:");
+        String name2 = scanner.nextLine();
+        System.out.println("Enter age for person 2:");
+        int age2 = scanner.nextInt();
+        A1sc person2 = new A1sc(name2, age2);
+
+
+        System.out.println("Person 1: " + person1.getName() + ", Age: " + person1.getAge());
+        System.out.println("Person 2: " + person2.getName() + ", Age: " + person2.getAge());
+
+        scanner.close();
+    }
+}
