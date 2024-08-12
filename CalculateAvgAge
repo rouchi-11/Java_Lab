@@ -1,0 +1,31 @@
+import java.util.Scanner;
+public class CalculateAvgAge {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the no of ages to be taken:");
+        int numberOfAges = sc.nextInt();
+        int[] ages = new int[numberOfAges];
+        for (int i = 0; i < numberOfAges; i++) {
+            System.out.println("Enter age" + (i + 1) + ":");
+            ages[i] = sc.nextInt();
+
+        }
+        double average = calculateAverage(ages);
+        System.out.printf("The average is: %.2f\n", average);
+
+        sc.close();
+    }
+         public static double calculateAverage(int[]ages){
+             int sum=0;
+             for(int age:ages){
+                 sum+=age;
+             }
+             return(double)sum/ages.length;
+
+
+        }
+
+
+
+    }
+
