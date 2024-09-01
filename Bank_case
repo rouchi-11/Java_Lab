@@ -1,0 +1,141 @@
+import java.util.Scanner;
+
+public class Bank {
+    private String name;
+    private double balance;
+    private int accountNumber;
+
+    
+    public Bank(String name, double balance, int accountNumber) {
+        this.name = name;
+        this.balance = balance;
+        this.accountNumber = accountNumber;
+    }
+
+    
+    public double getBalance() {
+        return balance;
+    }
+
+    
+    public String getName() {
+        return name;
+    }
+
+    
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+
+    
+    public void manageAccount() {
+        Scanner sc = new Scanner(System.in);
+        boolean exit = false;
+
+        while (!exit) {
+            System.out.println("Choose an option: 1. Deposit  2. Withdraw  3. Exit");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter amount to deposit:");
+                    double depositAmount = sc.nextDouble();
+                    deposit(depositAmount);
+                    System.out.println("New Balance: " + getBalance());
+                    break;
+
+                case 2:
+                    System.out.println("Enter amount to withdraw:");
+                    double withdrawAmount = sc.nextDouble();
+                    if (withdraw(withdrawAmount)) {
+                        System.out.println("New Balance: " + getBalance());
+                    } else {
+                        System.out.println("Insufficient funds.");
+                    }
+                    break;
+
+                case 3:
+                    exit = true;
+                    break;
+
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        }
+    }
+
+    
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        } else {
+            System.out.println("Deposit amount must be positive.");
+        }
+    }
+
+    
+    public boolean withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter the number of customers:");
+        int numCustomers = sc.nextInt();
+        Bank[] customers = new Bank[numCustomers];
+
+        
+        for (int i = 0; i < numCustomers; i++) {
+            sc.nextLine(); 
+            System.out.println("Enter the name of customer " + (i + 1) + ":");
+            String name = sc.nextLine();
+
+            System.out.println("Enter the initial balance for customer " + (i + 1) + ":");
+            double balance = sc.nextDouble();
+
+            System.out.println("Enter the account number for customer " + (i + 1) + ":");
+            int accountNumber = sc.nextInt();
+
+            customers[i] = new Bank(name, balance, accountNumber);
+            System.out.println("Account created successfully for " + name + " with Account Number: " + accountNumber);
+        }
+
+        boolean exitProgram = false;
+
+        while (!exitProgram) {
+            System.out.println("Enter your account number:");
+            int accountNum = sc.nextInt();
+
+            
+            Bank customer = null;
+            for (Bank c : customers) {
+                if (c.getAccountNumber() == accountNum) {
+                    customer = c;
+                    break;
+                }
+            }
+
+            if (customer != null) {
+                
+                customer.manageAccount();
+            } else {
+                System.out.println("Invalid account number. Please try again.");
+            }
+
+            System.out.println("Do you want to exit the program? (yes/no)");
+            exitProgram = sc.next().equalsIgnoreCase("yes");
+        }
+
+        
+        System.out.println("\nFinal details of all customers:");
+        for (Bank customer : customers) {
+            System.out.println("Name: " + customer.getName() + ", Account Number: " + customer.getAccountNumber() + ", Final Balance: " + customer.getBalance());
+        }
+    }
+}
