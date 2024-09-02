@@ -1,0 +1,172 @@
+import java.util.Scanner;
+
+public class Library {
+    private String username;
+    private int id;
+    private boolean remove_acc;
+
+    private boolean add_acc;
+    private int no;
+    private int increment;
+private int id1;
+    public Library(String username, int id, boolean remove_acc, boolean add_acc) {
+        this.username = username;
+        this.id = id;
+        this.remove_acc = remove_acc;
+        this.add_acc = add_ac;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+
+    public String username() {
+        return username;
+    }
+
+
+    public boolean remove_acc() {
+        return remove_acc;
+    }
+
+    public boolean add_acc() {
+        return add_acc;
+    }
+
+    public boolean Newbook(int id, String username) {
+        if (id == id1 && username1.equals(username)) {
+            System.out.println("Enter book to be issued:");
+            int increment = sc.nextInt();
+            no = no + increment;
+            System.out.println("Total no of books with person:" + increment);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean Removebook(int id, String username) {
+        if (id == id1 && username1.equals(username)) {
+            System.out.println("Enter book to be removed:");
+            int decrement = sc.nextInt();
+            no = no - decrement;
+            System.out.println("final books available:" + decrement);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean displayAcc(String username1) {
+        if (username1.equals(username)) {
+            System.out.println("Acc. no. : " + id);
+            System.out.println("Acc. Name : " + username);
+            System.out.println("Acc. no of book : " + no);
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean Issuebook(int id1, String username1) {
+        if (id == id1 && username1.equals(username)) {
+            System.out.println("Enter amount to deposit");
+            int increment = sc.nextInt();
+            no = no + increment;
+            System.out.println("final book issue " + no);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Library[] L = new Library[20];
+        int i = 0;
+        for (int j = 0; j < 20; j++) {
+            L[j] = new Library();
+        }
+        while (true) {
+            int choice = L[i].choices();
+            switch (choice) {
+                case 1:
+                    L[i].add_acc();
+                    i++;
+                    break;
+                case 2:
+                    System.out.println("Enter book no. : ");
+                    int no = sc.nextInt();
+                    System.out.println("Enter user name : ");
+                    String username1 = sc.next();
+                    for (int j = 0; j < i; j++) {
+                        boolean x = L[j].Newbook(id1, username1);
+                        if (x) {
+                            break;
+                        }
+                    }
+                    System.out.println("Your credentials are wrong ");
+                    break;
+                case 3:
+                    System.out.println("Enter user name : ");
+                    username1 = sc.next();
+                    System.out.println("Enter user no. : ");
+                    id1 = sc.nextInt();
+                    for (int j = 0; j < i; j++) {
+                        boolean x = L[j].Removebook(username1, id1);
+                        if (x) {
+                            break;
+                        }
+                    }
+                    System.out.println("Your input is wrong ");
+                    break;
+                case 4:
+                    System.out.println("Enter user name : ");
+                    username1 = sc.next();
+                    System.out.println("Enter acc. no. : ");
+                    id1 = sc.nextLong();
+                    for (int j = 0; j < i; j++) {
+                        boolean x = L[j].Issuebook(id1, username1);
+                        if (x) {
+                            L[j] = null;
+                            System.out.println("Book is issued");
+                            break;
+                        }
+                    }
+                    System.out.println("Your credentials are wrong ");
+                    break;
+                case 5:
+                    System.out.println("Enter user name : ");
+                    username1 = sc.next();
+                    for (int j = 0; j < i; j++) {
+                        boolean x = L[j].displayAcc(username1);
+                        if (x) {
+                            break;
+                        }
+                    }
+                    System.out.println("Your credentials are wrong ");
+                    break;
+                case 6:
+                    System.out.println("Exiting...");
+
+
+                    System.out.println("\nFinal details of all people:");
+                    for (int j = 0; j < i; j++) {
+                        if (L[j] != null) {
+                            System.out.println("Book ID : " + L[j].id);
+                            System.out.println("User Name: " + L[j].username);
+                            System.out.println("Final book count : " + L[j].no);
+                            System.out.println();
+                        }
+                    }
+                    return;
+                default:
+                    System.out.println("Invalid choice");
+            }
+        }
+    }
+
+}
+   
