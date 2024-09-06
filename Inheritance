@@ -1,0 +1,30 @@
+class A
+{
+    int i;
+    void show_i()
+    {
+        System.out.println("Super class attribute "+i);
+    }
+}
+class B extends A
+{
+    int sub_i;
+    void show_sub_i()
+    {
+        System.out.println("Sub class attribute "+sub_i);
+    }
+}
+public class Practice {
+    public static void main(String args[])
+    {
+        A a = new A();
+        a.i=10;
+        a.show_i();
+        B b = new B();
+        b.sub_i=20;
+        b.i=30;
+        b.show_sub_i();
+        b.show_i();
+
+    }
+}
