@@ -1,0 +1,183 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+abstract class Item {
+    private String title;
+    private String authorOrDirector;
+    private int year;
+
+    public Item(String title, String authorOrDirector, int year) {
+        this.title = title;
+        this.authorOrDirector = authorOrDirector;
+        this.year = year;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthorOrDirector() {
+        return authorOrDirector;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+
+    public abstract void displayDetails();
+}
+
+
+class Book extends Item {
+    private String genre;
+
+    public Book(String title, String author, int year, String genre) {
+        super(title, author, year);
+        this.genre = genre;
+    }
+
+    @Override
+    public void displayDetails() {
+        System.out.println("Book Title: " + getTitle());
+        System.out.println("Author: " + getAuthorOrDirector());
+        System.out.println("Year: " + getYear());
+        System.out.println("Genre: " + genre);
+    }
+}
+
+
+class DVD extends Item {
+    private String genre;
+
+    public DVD(String title, String director, int year, String genre) {
+        super(title, director, year);
+        this.genre = genre;
+    }
+
+    @Override
+    public void displayDetails() {
+        System.out.println("DVD Title: " + getTitle());
+        System.out.println("Director: " + getAuthorOrDirector());
+        System.out.println("Year: " + getYear());
+        System.out.println("Genre: " + genre);
+    }
+}
+
+
+class Library {
+    private String name;
+    private ArrayList<Item> catalog;
+
+    public Library(String name) {
+        this.name = name;
+        this.catalog = new ArrayList<>();
+    }
+
+
+    public void addItem(Item item) {
+        catalog.add(item);
+    }
+
+
+    public void displayCatalog() {
+        if (catalog.isEmpty()) {
+            System.out.println("The library catalog is empty.");
+        } else {
+            for (Item item : catalog) {
+                item.displayDetails();
+                System.out.println(); // For better readability
+            }
+        }
+    }
+
+
+    public void searchItemByTitle(String title) {
+        for (Item item : catalog) {
+            if (item.getTitle().equalsIgnoreCase(title)) {
+                item.displayDetails();
+                return;
+            }
+        }
+        System.out.println("Item not found in the catalog.");
+    }
+}
+
+
+public class LibraryManagementSystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Library library = new Library("City Library");
+
+        while (true) {
+            System.out.println("\n--- Library Catalog System ---");
+            System.out.println("1. Add a Book");
+            System.out.println("2. Add a DVD");
+            System.out.println("3. Display Catalog");
+            System.out.println("4. Search Item by Title");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();  // Consume the newline
+
+            switch (choice) {
+                case 1:
+                    addBook(scanner, library);
+                    break;
+                case 2:
+                    addDVD(scanner, library);
+                    break;
+                case 3:
+                    library.displayCatalog();
+                    break;
+                case 4:
+                    searchItem(scanner, library);
+                    break;
+                case 5:
+                    System.out.println("Exiting the system.");
+                    scanner.close();
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+
+    private static void addBook(Scanner scanner, Library library) {
+        System.out.print("Enter book title: ");
+        String title = scanner.nextLine();
+        System.out.print("Enter book author: ");
+        String author = scanner.nextLine();
+        System.out.print("Enter book year: ");
+        int year = scanner.nextInt();
+        scanner.nextLine();  // Consume the newline
+        System.out.print("Enter book genre: ");
+        String genre = scanner.nextLine();
+        library.addItem(new Book(title, author, year, genre));
+        System.out.println("Book added successfully.");
+    }
+
+
+    private static void addDVD(Scanner scanner, Library library) {
+        System.out.print("Enter DVD title: ");
+        String title = scanner.nextLine();
+        System.out.print("Enter DVD director: ");
+        String director = scanner.nextLine();
+        System.out.print("Enter DVD year: ");
+        int year = scanner.nextInt();
+        scanner.nextLine();  // Consume the newline
+        System.out.print("Enter DVD genre: ");
+        String genre = scanner.nextLine();
+        library.addItem(new DVD(title, director, year, genre));
+        System.out.println("DVD added successfully.");
+    }
+
+
+    private static void searchItem(Scanner scanner, Library library) {
+        System.out.print("Enter the title of the item to search: ");
+        String title = scanner.nextLine();
+        library.searchItemByTitle(title);
+    }
+}
