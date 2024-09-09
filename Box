@@ -1,0 +1,49 @@
+// Define the Box class
+class Box {
+    double width;
+    double height;
+    double depth;
+
+    // Constructor to initialize the Box
+    Box(double width, double height, double depth) {
+        this.width = width;
+        this.height = height;
+        this.depth = depth;
+    }
+
+    // Method to display the dimensions of the Box
+    void displayDimensions() {
+        System.out.println("Width: " + width);
+        System.out.println("Height: " + height);
+        System.out.println("Depth: " + depth);
+    }
+}
+
+// Define the BoxWeight class that extends Box
+class BoxWeight extends Box {
+    double weight;
+
+    // Constructor to initialize the BoxWeight
+    BoxWeight(double width, double height, double depth, double weight) {
+        // Call the constructor of the superclass (Box)
+        super(width, height, depth);
+        this.weight = weight;
+    }
+
+    // Method to display the weight of the BoxWeight
+    void displayWeight() {
+        System.out.println("Weight: " + weight);
+    }
+}
+
+// Main class to test the Box and BoxWeight classes
+public class Main {
+    public static void main(String[] args) {
+        // Create an instance of BoxWeight
+        BoxWeight boxWeight = new BoxWeight(10.0, 5.0, 8.0, 12.5);
+
+        // Display dimensions and weight
+        boxWeight.displayDimensions();
+        boxWeight.displayWeight();
+    }
+}
