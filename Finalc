@@ -1,0 +1,91 @@
+
+class Vehicle {
+    String name;
+    int year;
+    String model;
+
+    Vehicle() {
+        this.name = "Unknown";
+        this.year = 0;
+        this.model="UN";
+    }
+
+
+    Vehicle(String name, int year,String model) {
+        this.name = name;
+        this.year= year;
+        this.model=model;
+    }
+
+
+    void displayDetails() {
+        System.out.println("Name of car is: " + name);
+        System.out.println("Year is: " + year );
+        System.out.println("The model is:"+model);
+    }
+}
+
+
+class Car extends Vehicle {
+    int numberOfDoors;
+
+
+    Car() {
+        super();
+        this.numberOfDoors = 0;
+    }
+
+
+    Car(String name, int year,String model, int numberOfDoors) {
+
+        this.name = name;
+        this.model= model;
+        this.year=year;
+        this.numberOfDoors = numberOfDoors;
+    }
+
+
+    void displayCarDetails() {
+        displayDetails();
+        System.out.println("Number of Doors: " + numberOfDoors);
+    }
+}
+
+
+class Electriccar extends Car {
+    int batterycapacity;
+
+
+    Electriccar() {
+        super();
+        this.batterycapacity = 0;
+    }
+
+
+    Electriccar(String name, int year, String model,int numberOfDoors, int batterycapacity) {
+
+        this.name = name;
+        this.year = year;
+        this.numberOfDoors = numberOfDoors;
+        this.batterycapacity= batterycapacity;
+    }
+
+
+    void displayElectriccarDetails() {
+        displayCarDetails();
+        System.out.println("Batterycapacity: " + batterycapacity);
+    }
+}
+
+
+
+
+public class Finalc{
+    public static void main(String[] args) {
+
+        Electriccar c = new  Electriccar("TESLA", 2020, "xyz",4,40000);
+
+
+       c.displayElectriccarDetails();
+    }
+}
