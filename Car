@@ -1,0 +1,109 @@
+// Base class Vehicle
+class Vehicle {
+    String color;
+    double speed;
+
+    Vehicle() {
+        this.color = "Unknown";
+        this.speed = 0.0;
+    }
+
+    
+    Vehicle(String color, double speed) {
+        this.color = color;
+        this.speed = speed;
+    }
+
+    
+    void displayDetails() {
+        System.out.println("Color: " + color);
+        System.out.println("Speed: " + speed + " km/h");
+    }
+}
+
+
+class Car extends Vehicle {
+    int numberOfDoors;
+
+    
+    Car() {
+        super(); // Calls Vehicle default constructor implicitly
+        this.numberOfDoors = 0;
+    }
+
+    
+    Car(String color, double speed, int numberOfDoors) {
+        
+        this.color = color;
+        this.speed = speed;
+        this.numberOfDoors = numberOfDoors;
+    }
+
+    
+    void displayCarDetails() {
+        displayDetails();
+        System.out.println("Number of Doors: " + numberOfDoors);
+    }
+}
+
+// Derived class Motorcycle inheriting from Car
+class Motorcycle extends Car {
+    int numberOfWheels;
+
+    
+    Motorcycle() {
+        super(); // Calls Car default constructor implicitly
+        this.numberOfWheels = 0;
+    }
+
+    
+    Motorcycle(String color, double speed, int numberOfDoors, int numberOfWheels) {
+        // Calls Car parameterized constructor implicitly
+        this.color = color;
+        this.speed = speed;
+        this.numberOfDoors = numberOfDoors;
+        this.numberOfWheels = numberOfWheels;
+    }
+
+    
+    void displayMotorcycleDetails() {
+        displayCarDetails();
+        System.out.println("Number of Wheels: " + numberOfWheels);
+    }
+}
+
+
+class Truck extends Motorcycle {
+    double cargoCapacity;
+
+    // Default constructor for Truck
+    Truck() {
+        super(); // Calls Motorcycle default constructor implicitly
+        this.cargoCapacity = 0.0;
+    }
+
+    Truck(String color, double speed, int numberOfDoors, int numberOfWheels, double cargoCapacity) {
+        // Calls Motorcycle parameterized constructor implicitly
+        this.color = color;
+        this.speed = speed;
+        this.numberOfDoors = numberOfDoors;
+        this.numberOfWheels = numberOfWheels;
+        this.cargoCapacity = cargoCapacity;
+    }
+
+    void displayTruckDetails() {
+        displayMotorcycleDetails();
+        System.out.println("Cargo Capacity: " + cargoCapacity + " tons");
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        // Create an instance of Truck
+        Truck truck = new Truck("Red", 80.0, 2, 6, 15.5);
+
+        // Display details of the Truck
+        truck.displayTruckDetails();
+    }
+}
