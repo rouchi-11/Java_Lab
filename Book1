@@ -1,0 +1,118 @@
+import java.util.*;
+import java.util.ArrayList;
+
+class LibrarySystem
+{
+    Scanner s = new Scanner(System.in);
+    String Book_name;
+    String Author_name;
+    String Book_id;
+    String Book_ed;
+    int copies;
+    int Issued=0;
+
+    boolean Search()
+    {
+        System.out.println("enter book name:");
+        String I_Book_name=s.next();
+        System.out.println("enter book's Author name:");
+        String I_Author_name=s.next();
+        System.out.println("enter book edition:");
+        String I_Book_ed=s.next();
+        if(I_Book_name.equals(Book_name) && I_Author_name.equals(Author_name) && I_Book_ed.equals(Book_ed))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    void Issue(boolean x)
+    {
+        if(x)
+        {
+            Issued=Issued+1;
+            copies=copies-Issued;
+            System.out.println("remaining copies of this book are"+copies);
+        }
+        else
+        {
+            System.out.println("Book is not available for issue");
+        }
+    }
+
+    void Display()
+    {
+        System.out.println("book name:"+Book_name);
+        System.out.println("Book id:"+Book_id);
+        System.out.println("book edition:"+Book_ed);
+        System.out.println("number of copies:"+copies);
+    }
+    void Return(boolean x)
+    {
+        System.out.println(x);
+        if(x)
+        {
+            copies=copies+1;
+            System.out.println("number of copies are"+copies);
+        }
+        else
+        {
+            System.out.println("wrong book");
+        }
+    }
+
+
+}
+class Student extends LibrarySystem
+{
+
+}
+public class Book1
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n;
+        LibrarySystem obj= new LibrarySystem();
+        boolean x=false;
+
+        while(true)
+        {
+            ArrayList<LibrarySystem> a=new ArrayList<LibrarySystem>();
+            System.out.println("MENU: \n 1)Add \n 2) Issue \n 3) Display \n 4) Return \n 5) Exit");
+            System.out.println("enter your choice:");
+            int ch=sc.nextInt();
+            switch(ch)
+            {
+                case 1:
+                    System.out.println("enter book name:");
+                    obj.Book_name=sc.next();
+                    System.out.println("enter book's Author name:");
+                    obj.Author_name=sc.next();
+                    System.out.println("enter book id:");
+                    obj.Book_id=sc.next();
+                    System.out.println("enter book edition:");
+                    obj.Book_ed=sc.next();
+                    a.add(obj);
+                    break;
+                case 2:
+                    x=obj.Search();
+                    obj.Issue(x);
+                    break;
+                case 3:
+                    obj.Display();
+                    break;
+                case 4:
+                    x=obj.Search();
+                    obj.Return(x);
+                    break;
+                case 5:
+                    break;
+
+            }
+        }
+    }
+}
