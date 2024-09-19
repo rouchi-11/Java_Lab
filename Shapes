@@ -1,0 +1,35 @@
+class GeometricShapes {
+    double area(double radius) {
+        return Math.PI * radius * radius;
+    }
+
+    double area(double length, double width) {
+        return length * width;
+    }
+
+    double area(double base, double height) {
+        return 0.5 * base * height;
+    }
+
+    double perimeter(double radius) {
+        return 2 * Math.PI * radius;
+    }
+
+    double perimeter(double length, double width) {
+        return 2 * (length + width);
+    }
+
+    double perimeter(double side1, double side2, double side3) {
+        return side1 + side2 + side3;
+    }
+
+    public static void main(String[] args) {
+        GeometricShapes shapes = new GeometricShapes();
+        System.out.println("Circle Area: " + shapes.area(5));
+        System.out.println("Rectangle Area: " + shapes.area(4, 6));
+        System.out.println("Triangle Area: " + shapes.area(3, 4));
+        System.out.println("Circle Perimeter: " + shapes.perimeter(5));
+        System.out.println("Rectangle Perimeter: " + shapes.perimeter(4, 6));
+        System.out.println("Triangle Perimeter: " + shapes.perimeter(3, 4, 5));
+    }
+}
