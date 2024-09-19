@@ -1,0 +1,42 @@
+class Post {
+    void createPost() {
+        System.out.println("Creating a generic post");
+    }
+
+    void comment() {
+        System.out.println("Commenting on a generic post");
+    }
+}
+
+class TextPost extends Post {
+    void createPost() {
+        System.out.println("Creating a text post");
+    }
+
+    void comment() {
+        System.out.println("Commenting on a text post");
+    }
+}
+
+class ImagePost extends Post {
+    void createPost() {
+        System.out.println("Creating an image post");
+    }
+
+    void comment() {
+        System.out.println("Commenting on an image post");
+    }
+}
+
+public class SocialMedia {
+    public static void main(String[] args) {
+        Post post1 = new TextPost();
+        Post post2 = new ImagePost();
+
+        post1.createPost();
+        post1.comment();
+        
+        post2.createPost();
+        post2.comment();
+    }
+}
