@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 abstract class Item {
     private String title;
-    private String authorOrDirector;
+    private String author;
     private int year;
 
-    public Item(String title, String authorOrDirector, int year) {
+    public Item(String title, String author, int year) {
         this.title = title;
-        this.authorOrDirector = authorOrDirector;
+        this.author = author;
         this.year = year;
     }
 
@@ -17,16 +17,15 @@ abstract class Item {
         return title;
     }
 
-    public String getAuthorOrDirector() {
-        return authorOrDirector;
+    public String getAuthor() {
+        return author;
     }
 
     public int getYear() {
         return year;
     }
 
-
-    public abstract void displayDetails();
+      public abstract void displayDetails();
 }
 
 
@@ -41,7 +40,7 @@ class Book extends Item {
     @Override
     public void displayDetails() {
         System.out.println("Book Title: " + getTitle());
-        System.out.println("Author: " + getAuthorOrDirector());
+        System.out.println("Author: " + getAuthor());
         System.out.println("Year: " + getYear());
         System.out.println("Genre: " + genre);
     }
@@ -59,7 +58,7 @@ class DVD extends Item {
     @Override
     public void displayDetails() {
         System.out.println("DVD Title: " + getTitle());
-        System.out.println("Director: " + getAuthorOrDirector());
+        System.out.println("Director: " + getAuthor());
         System.out.println("Year: " + getYear());
         System.out.println("Genre: " + genre);
     }
@@ -87,7 +86,7 @@ class Library {
         } else {
             for (Item item : catalog) {
                 item.displayDetails();
-                System.out.println(); // For better readability
+                System.out.println();
             }
         }
     }
@@ -105,13 +104,13 @@ class Library {
 }
 
 
-public class LibraryManagementSystem {
+public class LibraryManagementSystem1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Library library = new Library("City Library");
 
         while (true) {
-            System.out.println("\n--- Library Catalog System ---");
+            System.out.println("\n Library Catalog System ");
             System.out.println("1. Add a Book");
             System.out.println("2. Add a DVD");
             System.out.println("3. Display Catalog");
@@ -119,7 +118,7 @@ public class LibraryManagementSystem {
             System.out.println("5. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume the newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -152,7 +151,7 @@ public class LibraryManagementSystem {
         String author = scanner.nextLine();
         System.out.print("Enter book year: ");
         int year = scanner.nextInt();
-        scanner.nextLine();  // Consume the newline
+        scanner.nextLine();
         System.out.print("Enter book genre: ");
         String genre = scanner.nextLine();
         library.addItem(new Book(title, author, year, genre));
@@ -167,7 +166,7 @@ public class LibraryManagementSystem {
         String director = scanner.nextLine();
         System.out.print("Enter DVD year: ");
         int year = scanner.nextInt();
-        scanner.nextLine();  // Consume the newline
+        scanner.nextLine();
         System.out.print("Enter DVD genre: ");
         String genre = scanner.nextLine();
         library.addItem(new DVD(title, director, year, genre));
