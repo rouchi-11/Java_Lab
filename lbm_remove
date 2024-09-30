@@ -1,0 +1,107 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Book {
+    String title;
+    String author;
+    String ISBN;
+    boolean availability;
+
+    public Book(String title, String author, String ISBN, boolean availability) {
+        this.title = title;
+        this.author = author;
+        this.ISBN = ISBN;
+        this.availability = availability;
+    }
+}
+
+class DVD extends Book {
+    public DVD(String title, String director, String ISBN, boolean availability) {
+        super(title, director, ISBN, availability);
+    }
+}
+
+class Library {
+    ArrayList<Book> books;
+
+    public Library() {
+        books = new ArrayList<>();
+    }
+
+    public void addBook(Book book) {
+        books.add(book);
+    }
+
+    public void removeBook(String ISBN) {
+        for (Book book : books) {
+            if (book.ISBN.equals(ISBN)) {
+                books.remove(book);
+                break;
+            }
+        }
+    }
+
+    public void displayBooks() {
+        for (Book book : books) {
+            System.out.println("Title: " + book.title);
+            System.out.println("Author/Director: " + book.author);
+            System.out.println("ISBN: " + book.ISBN);
+            System.out.println("Availability: " + book.availability);
+            System.out.println();
+        }
+    }
+}
+
+class LibraryManagementSystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Library library = new Library();
+
+        while (true) {
+            System.out.println("1. Add Book");
+            System.out.println("2. Add DVD");
+            System.out.println("3. Remove Book/DVD");
+            System.out.println("4. Display Books/DVDs");
+            System.out.println("5. Exit");
+            int choice = scanner.nextInt();
+
+            if (choice == 1) {
+                scanner.nextLine(); 
+                System.out.print("Enter title: ");
+                String title = scanner.nextLine();
+                System.out.print("Enter author: ");
+                String author = scanner.nextLine();
+                System.out.print("Enter ISBN: ");
+                String ISBN = scanner.nextLine();
+                System.out.print("Enter availability (true/false): ");
+                boolean availability = scanner.nextBoolean();
+                library.addBook(new Book(title, author, ISBN, availability));
+
+            } else if (choice == 2) {
+                scanner.nextLine();
+                System.out.print("Enter title: ");
+                String title = scanner.nextLine();
+                System.out.print("Enter director: ");
+                String director = scanner.nextLine();
+                System.out.print("Enter ISBN: ");
+                String ISBN = scanner.nextLine();
+                System.out.print("Enter availability (true/false): ");
+                boolean availability = scanner.nextBoolean();
+                library.addBook(new DVD(title, director, ISBN, availability));
+
+            } else if (choice == 3) {
+                scanner.nextLine(); 
+                System.out.print("Enter ISBN: ");
+                String ISBN = scanner.nextLine();
+                library.removeBook(ISBN);
+
+            } else if (choice == 4) {
+                library.displayBooks();
+
+            } else if (choice == 5) {
+                break;
+            }
+        }
+        scanner.close();
+    }
+}
