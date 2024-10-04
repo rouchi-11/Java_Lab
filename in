@@ -1,0 +1,82 @@
+class Post {
+    String user;
+    String content;
+
+    public Post(String user, String content) {
+        this.user = user;
+        this.content = content;
+    }
+
+    public void postContent() {
+        System.out.println(user + " shared a post: " + content);
+    }
+
+    public void comment(String comment) {
+        System.out.println(user + " commented: " + comment);
+    }
+}
+
+class TextPost extends Post {
+    public TextPost(String user, String content) {
+        super(user, content);
+    }
+
+    @Override
+    public void postContent() {
+        System.out.println(user + " shared a text post: " + content);
+    }
+
+    @Override
+    public void comment(String comment) {
+        System.out.println(user + " commented on a text post: " + comment);
+    }
+}
+
+class ImagePost extends Post {
+    public ImagePost(String user, String content) {
+        super(user, content);
+    }
+
+    @Override
+    public void postContent() {
+        System.out.println(user + " shared an image post: " + content);
+    }
+
+    @Override
+    public void comment(String comment) {
+        System.out.println(user + " commented on an image post: " + comment);
+    }
+}
+
+class StoryPost extends Post {
+    public StoryPost(String user, String content) {
+        super(user, content);
+    }
+
+    @Override
+    public void postContent() {
+        System.out.println(user + " shared a story: " + content);
+    }
+
+    @Override
+    public void comment(String comment) {
+        System.out.println(user + " replied to a story: " + comment);
+    }
+}
+
+public class InstagramApp {
+    public static void main(String[] args) {
+        Post textPost = new TextPost("Alice", "Feeling happy today!");
+        Post imagePost = new ImagePost("Bob", "Vacation photo.jpg");
+        Post storyPost = new StoryPost("Charlie", "Just landed in New York!");
+
+        textPost.postContent();
+        textPost.comment("Glad to hear!");
+
+        imagePost.postContent();
+        imagePost.comment("Beautiful photo!");
+
+        storyPost.postContent();
+        storyPost.comment("Welcome to NY!");
+    }
+}
