@@ -1,0 +1,186 @@
+import java.util.Scanner;
+
+class Post {
+    String user;
+    String content;
+    int likes;
+    int commentsCount;
+
+    public Post(String user, String content) {
+        this.user = user;
+        this.content = content;
+        this.likes = 0;
+        this.commentsCount = 0;
+    }
+
+    public void postContent() {
+        System.out.println(user + " shared a post: " + content);
+    }
+
+    public void comment(String commenter, String comment) {
+        commentsCount++;
+        System.out.println(commenter + " commented: " + comment);
+        System.out.println("Total comments: " + commentsCount);
+    }
+
+    public void like() {
+        likes++;
+        System.out.println(user + "'s post received a like! Total likes: " + likes);
+    }
+
+    public String getPostType() {
+        return "Generic Post";
+    }
+}
+
+class TextPost extends Post {
+    public TextPost(String user, String content) {
+        super(user, content);
+    }
+
+    @Override
+    public void postContent() {
+        System.out.println(user + " shared a text post: " + content);
+    }
+
+    @Override
+    public void comment(String commenter, String comment) {
+        commentsCount++;
+        System.out.println(commenter + " commented on a text post: " + comment);
+        System.out.println("Total comments on this text post: " + commentsCount);
+    }
+
+    @Override
+    public String getPostType() {
+        return "Text Post";
+    }
+}
+
+class ImagePost extends Post {
+    public ImagePost(String user, String content) {
+        super(user, content);
+    }
+
+    @Override
+    public void postContent() {
+        System.out.println(user + " shared an image post: " + content);
+    }
+
+    @Override
+    public void comment(String commenter, String comment) {
+        commentsCount++;
+        System.out.println(commenter + " commented on an image post: " + comment);
+        System.out.println("Total comments on this image post: " + commentsCount);
+    }
+
+    @Override
+    public String getPostType() {
+        return "Image Post";
+    }
+}
+
+class StoryPost extends Post {
+    public StoryPost(String user, String content) {
+        super(user, content);
+    }
+
+    @Override
+    public void postContent() {
+        System.out.println(user + " shared a story: " + content);
+    }
+
+    @Override
+    public void comment(String commenter, String comment) {
+        commentsCount++;
+        System.out.println(commenter + " replied to a story: " + comment);
+        System.out.println("Total replies to this story: " + commentsCount);
+    }
+
+    @Override
+    public String getPostType() {
+        return "Story Post";
+    }
+}
+
+public class InstagramApp {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        
+        Post textPost = new TextPost("Rouchi", "Feeling happy today!");
+        Post imagePost = new ImagePost("Riya", "Vacation photo.jpg");
+        Post storyPost = new StoryPost("Sanu", "Just landed in New York!");
+
+        boolean exit = false;
+        while (!exit) {
+            System.out.println("\nSelect the post you want to interact with:");
+            System.out.println("1. Text Post");
+            System.out.println("2. Image Post");
+            System.out.println("3. Story Post");
+            System.out.println("4. Exit");
+
+            int postChoice = scanner.nextInt();
+            scanner.nextLine();  
+
+            Post selectedPost = null;
+            switch (postChoice) {
+                case 1:
+                    selectedPost = textPost;
+                    break;
+                case 2:
+                    selectedPost = imagePost;
+                    break;
+                case 3:
+                    selectedPost = storyPost;
+                    break;
+                case 4:
+                    exit = true;
+                    continue;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    continue;
+            }
+
+          
+            boolean postExit = false;
+            while (!postExit) {
+                System.out.println("\nSelected: " + selectedPost.getPostType());
+                System.out.println("1. View Post");
+                System.out.println("2. Like Post");
+                System.out.println("3. Comment on Post");
+                System.out.println("4. Show Post Type");
+                System.out.println("5. Back to Post Selection");
+
+                int actionChoice = scanner.nextInt();
+                scanner.nextLine();  
+
+                switch (actionChoice) {
+                    case 1:
+                        selectedPost.postContent();
+                        break;
+                    case 2:
+                        selectedPost.like();
+                        break;
+                    case 3:
+                        System.out.print("Enter your name to comment: ");
+                        String commenter = scanner.nextLine();
+                        System.out.print("Enter your comment: ");
+                        String comment = scanner.nextLine();
+                        selectedPost.comment(commenter, comment);
+                        break;
+                    case 4:
+                        System.out.println("This is a " + selectedPost.getPostType());
+                        break;
+                    case 5:
+                        postExit = true;
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                        break;
+                }
+            }
+        }
+
+        scanner.close();
+    }
+}
