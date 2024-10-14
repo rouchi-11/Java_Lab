@@ -1,0 +1,56 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+abstract class Course{
+    private String CourseTitle;
+    private int CourseId;
+    private int Credits;
+
+    public Course(String CoursetTitle, int CourseId, int Credits) {
+        this.CourseTitle = CourseTitle;
+        this.CourseId = CourseId;
+        this.Credits = Credits;
+    }
+    public String getCourseTitle() {
+        return CourseTitle;
+    }
+
+    public int getCourseId() {
+        return CourseId;
+    }
+
+    public int getCredits() {
+        return Credits;
+    }
+
+    public abstract void displayDetails();
+}
+
+class IT extends Course {
+    private String interest;
+
+    public enrolstudents(String CourseTitle, String interest, int CourseId, int Credits) {
+        super(CourseTitle, CourseId, Credits);
+        this.interest = interest;
+    }
+
+    public IT(String CoursetTitle, int CourseId, int Credits) {
+        super(CoursetTitle, CourseId, Credits);
+    }
+
+
+    @Override
+    public void displayDetails() {
+        System.out.println("CourseTitle: " + getCourseTitle());
+        System.out.println("CourseId: " + getCourseId());
+        System.out.println("Credits: " + getCredits());
+        System.out.println("interest: " + interest);
+    }
+
+abstract class Mech extends Course{
+        
+    }
+}
+
+
