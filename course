@@ -1,0 +1,144 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+abstract class Course {
+    private String courseCode;
+    private String title;
+    private int credits;
+    private List<String> enrolledStudents;
+
+    public Course(String courseCode, String title, int credits) {
+        this.courseCode = courseCode;
+        this.title = title;
+        this.credits = credits;
+        this.enrolledStudents = new ArrayList<>();
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int getCredits() {
+        return credits;
+    }
+
+    protected void addStudent(String studentName) {
+        enrolledStudents.add(studentName);
+    }
+
+    protected List<String> getEnrolledStudents() {
+        return enrolledStudents;
+    }
+
+    public abstract void enrollStudent(String studentName);
+    public abstract void displayCourseDetails();
+}
+
+class InformationTechnologyCourse extends Course {
+    private int maxStudents;
+
+    public InformationTechnologyCourse(String courseCode, String title, int credits, int maxStudents) {
+        super(courseCode, title, credits);
+        this.maxStudents = maxStudents;
+    }
+
+    @Override
+    public void enrollStudent(String studentName) {
+        if (getEnrolledStudents().size() < maxStudents) {
+            addStudent(studentName);
+            System.out.println(studentName + " has been enrolled in the IT course: " + getTitle());
+        } else {
+            System.out.println("Enrollment full for IT course: " + getTitle());
+        }
+    }
+
+    @Override
+    public void displayCourseDetails() {
+        System.out.println("IT Course - Code: " + getCourseCode() + ", Title: " + getTitle() + ", Credits: " + getCredits());
+        System.out.println("Enrolled Students: " + getEnrolledStudents());
+    }
+}
+
+class MechEngineeringCourse extends Course {
+    private int maxStudents;
+
+    public MechEngineeringCourse(String courseCode, String title, int credits, int maxStudents) {
+        super(courseCode, title, credits);
+        this.maxStudents = maxStudents;
+    }
+
+    @Override
+    public void enrollStudent(String studentName) {
+        if (getEnrolledStudents().size() < maxStudents) {
+            addStudent(studentName);
+            System.out.println(studentName + " has been enrolled in the Mech course: " + getTitle());
+        } else {
+            System.out.println("Enrollment full for Mech course: " + getTitle());
+        }
+    }
+
+    @Override
+    public void displayCourseDetails() {
+        System.out.println("Mech Course - Code: " + getCourseCode() + ", Title: " + getTitle() + ", Credits: " + getCredits());
+        System.out.println("Enrolled Students: " + getEnrolledStudents());
+    }
+}
+
+public class UniversityCourseRegistration {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        InformationTechnologyCourse itCourse = new InformationTechnologyCourse("IT101", "Introduction to IT", 3, 30);
+        MechEngineeringCourse mechCourse = new MechEngineeringCourse("ME201", "Fluid Mechanics", 4, 25);
+
+        boolean exit = false;
+        while (!exit) {
+            System.out.println("\n--- University Course Registration ---");
+            System.out.println("1. Enroll in IT Course");
+            System.out.println("2. Enroll in Mech Engineering Course");
+            System.out.println("3. Display IT Course Details");
+            System.out.println("4. Display Mech Engineering Course Details");
+            System.out.println("5. Exit");
+
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter your name to enroll in IT Course: ");
+                    String itStudent = scanner.nextLine();
+                    itCourse.enrollStudent(itStudent);
+                    break;
+
+                case 2:
+                    System.out.print("Enter your name to enroll in Mech Engineering Course: ");
+                    String mechStudent = scanner.nextLine();
+                    mechCourse.enrollStudent(mechStudent);
+                    break;
+
+                case 3:
+                    itCourse.displayCourseDetails();
+                    break;
+
+                case 4:
+                    mechCourse.displayCourseDetails();
+                    break;
+
+                case 5:
+                    exit = true;
+                    break;
+
+                default:
+                    System.out.println("Invalid choice, please try again.");
+            }
+        }
+
+        scanner.close();
+    }
+}
